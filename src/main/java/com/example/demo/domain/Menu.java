@@ -33,12 +33,20 @@ public class Menu extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private FoodType foodType;
 
+    @Column(name = "score")
+    private Double score;
+
+    // Entity?
+    @Column(name = "evaluator")
+    private String evaluator;
+
     @ManyToOne
     private Restaurant restaurant;
 
     @Builder
-    public Menu(final String name, final Restaurant restaurant) {
+    public Menu(final String name, final String evaluator, final Restaurant restaurant) {
             this.name = name;
+            this.evaluator = evaluator;
             this.restaurant = restaurant;
     }
 }
