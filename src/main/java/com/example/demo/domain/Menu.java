@@ -1,14 +1,6 @@
 package com.example.demo.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +28,9 @@ public class Menu extends BaseTimeEntity {
     @Column(name = "score")
     private Double score;
 
+    @Column(name = "description1", length = 2047)
+    private String description;
+
     // Entity?
     @Column(name = "evaluator")
     private String evaluator;
@@ -44,9 +39,14 @@ public class Menu extends BaseTimeEntity {
     private Restaurant restaurant;
 
     @Builder
-    public Menu(final String name, final String evaluator, final Restaurant restaurant) {
+    public Menu(final String name, final String evaluator, final Double score,
+                final Restaurant restaurant, final String description, final FoodType foodType) {
             this.name = name;
             this.evaluator = evaluator;
+            this.score = score;
             this.restaurant = restaurant;
+            this.restaurant.addMenu(this);
+            this.description = description;
+            this.foodType = foodType;
     }
 }

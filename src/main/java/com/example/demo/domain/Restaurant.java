@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -29,8 +31,9 @@ public class Restaurant extends BaseTimeEntity {
     private String name;
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Menu> menuLists;
+    private List<Menu> menuLists = new ArrayList<>();
 
+    @Builder
     public Restaurant (final String name) {
         this.name = name;
     }
